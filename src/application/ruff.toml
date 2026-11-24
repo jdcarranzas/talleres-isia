@@ -1,0 +1,16 @@
+# Frontera hexagonal: la aplicación solo depende de stdlib y src.domain. ADR-003.
+extend = "../../pyproject.toml"
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[lint.flake8-tidy-imports.banned-api]
+"fastapi".msg = "src/application no conoce HTTP; expóngalo en src/adapters/inbound/api (ADR-003)."
+"starlette".msg = "src/application no conoce HTTP (ADR-003)."
+"pydantic".msg = "src/application usa dataclasses; los contratos Pydantic viven en inbound (ADR-003)."
+"typer".msg = "src/application no conoce la CLI (ADR-003)."
+"uvicorn".msg = "src/application no conoce el servidor ASGI (ADR-003)."
+"sqlite3".msg = "Use IncidentRepositoryPort; el driver vive en src/adapters/outbound (ADR-003)."
+"psycopg".msg = "Use IncidentRepositoryPort; el driver vive en src/adapters/outbound (ADR-004)."
+"sqlalchemy".msg = "Sin ORMs pesados (Constitución, ADR-001/ADR-004)."
+"src.adapters".msg = "La aplicación no depende de adaptadores concretos (ADR-003)."

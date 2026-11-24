@@ -1,0 +1,15 @@
+# Frontera hexagonal: los adaptadores primarios delegan en IncidentService y obtienen
+# la persistencia solo mediante src.adapters.outbound.factory. ADR-003 / ADR-004.
+extend = "../../../pyproject.toml"
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[lint.flake8-tidy-imports.banned-api]
+"sqlite3".msg = "Los adaptadores primarios no usan drivers de BD; delegue en IncidentService (ADR-003)."
+"psycopg".msg = "Los adaptadores primarios no usan drivers de BD; delegue en IncidentService (ADR-004)."
+"sqlalchemy".msg = "Sin ORMs pesados (Constitución, ADR-001/ADR-004)."
+"src.adapters.outbound.sqlite_repository".msg = "Use src.adapters.outbound.factory.create_repository (ADR-004)."
+"src.adapters.outbound.postgres_repository".msg = "Use src.adapters.outbound.factory.create_repository (ADR-004)."
+"src.domain.triage_rules".msg = "Invoque IncidentService.triage_incident, no el motor de reglas (ADR-003)."
+"src.domain.sla_calculator".msg = "Invoque IncidentService.evaluate_incident_sla, no el calculador (ADR-003)."

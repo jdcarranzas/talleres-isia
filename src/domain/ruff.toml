@@ -1,0 +1,17 @@
+# Frontera hexagonal: el dominio es Python puro (stdlib + src.domain). ADR-003.
+extend = "../../pyproject.toml"
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "parents"
+
+[lint.flake8-tidy-imports.banned-api]
+"fastapi".msg = "src/domain es puro: no importa frameworks HTTP (ADR-003)."
+"starlette".msg = "src/domain es puro: no importa frameworks HTTP (ADR-003)."
+"pydantic".msg = "src/domain usa dataclasses; Pydantic vive en src/adapters/inbound (ADR-003)."
+"typer".msg = "src/domain no conoce la CLI (ADR-003)."
+"uvicorn".msg = "src/domain no conoce el servidor ASGI (ADR-003)."
+"sqlite3".msg = "src/domain no accede a la BD; use IncidentRepositoryPort (ADR-003)."
+"psycopg".msg = "src/domain no accede a la BD; use IncidentRepositoryPort (ADR-003/ADR-004)."
+"sqlalchemy".msg = "Sin ORMs pesados (Constitución, ADR-001/ADR-004)."
+"src.application".msg = "El dominio no depende de la capa de aplicación (ADR-003)."
+"src.adapters".msg = "El dominio no depende de adaptadores (ADR-003)."

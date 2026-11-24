@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+*.db
+.pytest_cache/
+.vscode/
+.ruff_cache/
+incidentops.db
+docker_evidence.txt
